@@ -23,13 +23,10 @@ pipeline {
 					
 			archiveArtifacts artifacts: 'target/surefire-reports/com.techprimers.testing.FizzBuzzTest.txt', onlyIfSuccessful: true
 								
-			emailext attachLog: true, attachmentsPattern: 'com.techprimers.testing.FizzBuzzTest.txt',
-			body: '''emailext (
-          subject: "SUCCESSFUL: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\'",
-          body: """<p>SUCCESSFUL: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\':</p>
-            <p>Check console output at &QUOT;<a href=\'${env.BUILD_URL}\'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-          recipientProviders: [[$class: \'DevelopersRecipientProvider\']]
-        )''', subject: 'Test Jenkins Pipeline', to: 'lazio_karisma@manulife.com'
+			emailext attachLog: true, attachmentsPattern: 'target/surefire-reports/com.techprimers.testing.FizzBuzzTest.txt',
+			subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>"""
                 }
             }
         }
