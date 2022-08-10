@@ -21,7 +21,10 @@ pipeline {
                     //archiveArtifacts 'target/*.jar'
 					echo 'success'
 					
-			emailext body: '''emailext (
+			archiveArtifacts artifacts: 'com.techprimers.testing.FizzBuzzTest.txt', onlyIfSuccessful: true
+								
+			emailext attachLog: true, attachmentsPattern: 'com.techprimers.testing.FizzBuzzTest.txt',
+			body: '''emailext (
           subject: "SUCCESSFUL: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\'",
           body: """<p>SUCCESSFUL: Job \'${env.JOB_NAME} [${env.BUILD_NUMBER}]\':</p>
             <p>Check console output at &QUOT;<a href=\'${env.BUILD_URL}\'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
