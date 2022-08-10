@@ -21,7 +21,7 @@ pipeline {
                     //archiveArtifacts 'target/*.jar'
 					echo 'success'
 					
-			archiveArtifacts artifacts: 'com.techprimers.testing.FizzBuzzTest.txt', onlyIfSuccessful: true
+			archiveArtifacts artifacts: 'target/surefire-reports/com.techprimers.testing.FizzBuzzTest.txt', onlyIfSuccessful: true
 								
 			emailext attachLog: true, attachmentsPattern: 'com.techprimers.testing.FizzBuzzTest.txt',
 			body: '''emailext (
